@@ -1,0 +1,27 @@
+
+body {
+  background-image: radial-gradient(circle at 25% 25%, #eef, #bbf);
+}
+
+.main-nav {
+    box-shadow:0 0 10px #0007;
+    background-image:linear-gradient(220deg, #248, #016);
+}
+
+#dashboard-leftbar {
+    background-image: radial-gradient(circle at 100% 250%, #8df, #23b);
+    color:#bbf;
+}
+
+#dashboard-leftbar li.current {
+    /*background-image: radial-gradient(circle at 90% 30%,#fff, #fff 3%,#fff9 5%, #fff6 25%, #fff0);*/
+    background-image: radial-gradient(ellipse at 200% 0%,#fff7, #fff0);
+}
+
+#dashboard-leftbar hr {
+    border-color:#fff3;
+}
+
+#dashboard-rightbar {
+    background-image: radial-gradient(circle at 75% 25%, #eef, #bbf);
+}

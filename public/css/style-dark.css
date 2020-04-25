@@ -1,0 +1,31 @@
+
+body {
+    background-color:#001;
+    color:white;
+}
+
+.main-nav {
+    background-color:#001;
+}
+
+#dashboard-leftbar {
+    background-color:#040816;
+    color:#ddf;
+}
+
+#dashboard-leftbar li.current {
+    background-color:#223;
+}
+
+#dashboard-leftbar hr {
+    border-color:#fff3;
+}
+
+#dashboard-rightbar {
+    background-color:#040816;
+}
+
+.dropdown-menu {
+    background-color: #112;
+    border:1px solid #223;
+}

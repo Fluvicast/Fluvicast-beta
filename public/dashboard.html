@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/fa/css/all.css">
+    <link rel="stylesheet" href="/css/bootstrap-4.4.1.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link id="css-theme" rel="stylesheet" href="/css/style-ocean.css">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand navbar-dark main-nav">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown link
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <!--
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        -->
+        <span class="dropdown">
+          <a class="nav-link dropdown-toggle navbar-text" href="#" id="themeDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="set-tooltip" data-toggle="tooltip" data-placement="bottom" title="Theme"><i class="fas fa-palette"></i></span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="themeDropDown" style="min-width:auto;">
+            <button class="dropdown-item set-tooltip" onclick="setThemeLight()" data-toggle="tooltip" data-placement="left" title="Light">
+              <i class="fas fa-circle" style="color:#d0deed"></i>
+            </button>
+            <button class="dropdown-item set-tooltip" onclick="setThemeOcean()" data-toggle="tooltip" data-placement="left" title="Ocean (colorful)">
+              <i class="far fa-circle" style="color:#28f"></i>
+            </button>
+            <button class="dropdown-item set-tooltip" onclick="setThemeDark()" data-toggle="tooltip" data-placement="left" title="Dark">
+              <i class="fas fa-circle" style="color:#223"></i>
+            </button>
+          </div>
+        </span>
+        <small class="navbar-text">This is an Ocean project</small>
+      </div>
+    </nav>
+
+    <div id="dashboard-container">
+      <div id="dashboard-leftbar">
+        <nav>
+          <ul>
+            <li><i class="fas fa-globe p-2"></i>Overview</li>
+            <hr/>
+            <li class="current"><i class="fas fa-photo-video p-2"></i>Videos</li>
+            <li><i class="fas fa-wifi p-2"></i>Streams</li>
+            <li><i class="fas fa-podcast p-2"></i>Channels</li>
+            <hr/>
+            <li><i class="fas fa-users p-2"></i>Audience</li>
+            <li><i class="fas fa-user-friends p-2"></i>Partners</li>
+            <li><i class="fas fa-money-bill-wave p-2"></i>Advertisements</li>
+            <li><i class="fas fa-chart-line p-2"></i>Analytics</li>
+            <hr/>
+            <li><i class="fas fa-tv p-2"></i>View my channel</li>
+          </ul>
+        </nav>
+      </div>
+      <div id="dashboard-main">
+        <h2>My content</h2>
+        <hr/>
+        
+        <!--
+        <div id="dashboard-content" class="d-flex flex-wrap justify-content-start">
+
+          
+          <div class="content-instance">
+            <div class="img">
+              <div class="d-flex align-items-center align-content-around">
+                <div class="mx-auto">
+                  <button><i class="fas fa-play"></i></button>
+                  <button><i class="fas fa-tools"></i></button>
+                </div>
+              </div>
+            </div>
+            <p class="p-2"><b>Lorem Ipsum Dolor</b></p>
+          </div>
+          
+
+        </div>
+        -->
+        
+        <div id="drop-area" class="dropzone">
+          <form style="height:100%">
+            <input id="fileElem" type="file" style="display:none;"/>
+            <div class="d-flex justify-content-center" style="height:100%">
+              <div class="d-flex flex-column justify-content-center">
+                <div style="color:lightgrey;">
+                  <i class="fas fa-download" style="font-size:48px;"></i>
+                  <h3>Drag and drop videos here to upload</h3>
+                  <p>You can also click this box to open a dialog window</p>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="fullscreen nomouse file-cover">
+
+        </div>
+        
+      </div>
+      <div id="dashboard-rightbar">
+        
+      </div>
+    </div>
+
+    <progress id="progress-bar" max=100 value=0></progress>
+
+    <script src="/js/vendor/jquery-3.4.1.js"></script>
+    <script src="/js/vendor/popper-1.16.0.js"></script>
+    <script src="/js/vendor/bootstrap-4.4.1.js"></script>
+    <script src="/js/vendor/react-16.js"></script>
+    <script src="/js/vendor/react-dom-16.13.1.js"></script>
+    <script src="/js/vendor/babel-6.26.0.js"></script>
+
+    <script src="/js/file-dropzone.js"></script>
+    <script type="text/babel" src="/js/video-vignette.js"></script>
+    <script>
+      $('.set-tooltip').tooltip({});
+
+      function setThemeLight() {
+        $('#css-theme')[0].href = "/css/style-light.css";
+        $('.navbar-dark').addClass('navbar-light').removeClass('navbar-dark')
+      }
+
+      function setThemeOcean() {
+        $('#css-theme')[0].href = "/css/style-ocean.css";
+        $('.navbar-light').addClass('navbar-dark').removeClass('navbar-light')
+      }
+
+      function setThemeDark() {
+        $('#css-theme')[0].href = "/css/style-dark.css";
+        $('.navbar-light').addClass('navbar-dark').removeClass('navbar-light')
+      }
+    </script>
+  </body>
+</html>

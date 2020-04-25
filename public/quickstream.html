@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/fa/css/all.css">
+    <link rel="stylesheet" href="/css/bootstrap-4.4.1.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link id="css-theme" rel="stylesheet" href="/css/style-ocean.css">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand navbar-dark main-nav">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown link
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+        <!--
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        -->
+        <span class="dropdown">
+          <a class="nav-link dropdown-toggle navbar-text" href="#" id="themeDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="set-tooltip" data-toggle="tooltip" data-placement="bottom" title="Theme"><i class="fas fa-palette"></i></span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="themeDropDown" style="min-width:auto;">
+            <button class="dropdown-item set-tooltip" onclick="setThemeLight()" data-toggle="tooltip" data-placement="left" title="Light">
+              <i class="fas fa-circle" style="color:#d0deed"></i>
+            </button>
+            <button class="dropdown-item set-tooltip" onclick="setThemeOcean()" data-toggle="tooltip" data-placement="left" title="Ocean (colorful)">
+              <i class="far fa-circle" style="color:#28f"></i>
+            </button>
+            <button class="dropdown-item set-tooltip" onclick="setThemeDark()" data-toggle="tooltip" data-placement="left" title="Dark">
+              <i class="fas fa-circle" style="color:#223"></i>
+            </button>
+          </div>
+        </span>
+        <small class="navbar-text">This is an Ocean project</small>
+      </div>
+    </nav>
+
+    <div id="global-lead" class="text-center">
+      <br/>
+      <h1 class="display-2">Start a quick stream</h1>
+      <hr>
+      <p style="font-size:36px">
+        <input id="streamkey" type="password" readonly value="8ebfcc6ba7de6ea098e52f47" style="padding:0;width:350px;text-align:center"/>
+      </p>
+      <p>
+        <button id="showstreamkey" class="btn btn-primary ml-3" style="font-size:24px" onclick="toggleStreamKeyVisibility()">
+          <i class="fas fa-low-vision"></i>
+        </button>
+        <button id="showstreamkey" class="btn btn-primary" style="font-size:24px" onclick="copyStreamKey()">
+          <i class="far fa-copy"></i>
+        </button>
+      </p>
+      <br/>
+      <p class="lead">
+        Use this as stream key, and send this link to your viewers :<br/>
+        <strong><a href="" target="_blank">https://example.org/quickstream/jHu8Xl02D</a></strong>
+      </p>
+      <br/>
+      <hr/>
+      <br/>
+      <p class="text-muted" style="max-width:480px;margin:auto;">
+        NOTE : Do not share private information during quick streams. The fact that the streams are unlisted on the main site doesn't mean they are perfectly protected from indiscrete eyes. For private streams, please <a href="#">create an account</a>.
+        <br/><br/>
+        Remember that the sites rules apply on quick streams. Moderators can and will review quick streams if there is suspicion that a stream might infringe the rules.
+        <br/><br/>
+        In addition to private streams, <a href="#">creating an account</a> offers multiple advantages, such as creating channels, growing an audience, monetizing your streams, and more!
+      </p>
+      <br/>
+      <br/>
+    </div>
+
+
+    <progress id="progress-bar" max=100 value=0></progress>
+
+    <script src="/js/vendor/jquery-3.4.1.js"></script>
+    <script src="/js/vendor/popper-1.16.0.js"></script>
+    <script src="/js/vendor/bootstrap-4.4.1.js"></script>
+    <script src="/js/vendor/react-16.js"></script>
+    <script src="/js/vendor/react-dom-16.13.1.js"></script>
+    <script src="/js/vendor/babel-6.26.0.js"></script>
+
+    <script>
+      $('.set-tooltip').tooltip({});
+
+      function setThemeLight() {
+        $('#css-theme')[0].href = "/css/style-light.css";
+        $('.navbar-dark').addClass('navbar-light').removeClass('navbar-dark')
+      }
+
+      function setThemeOcean() {
+        $('#css-theme')[0].href = "/css/style-ocean.css";
+        $('.navbar-light').addClass('navbar-dark').removeClass('navbar-light')
+      }
+
+      function setThemeDark() {
+        $('#css-theme')[0].href = "/css/style-dark.css";
+        $('.navbar-light').addClass('navbar-dark').removeClass('navbar-light')
+      }
+
+      function toggleStreamKeyVisibility() {
+        var input = $('#streamkey')[0];
+        if (input.type == "text") {
+          input.type = "password";
+        } else {
+          input.type = "text";
+        }
+      }
+
+      function createTempStream() {
+        fetch("/api/quickstream/create", {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify({})
+        })
+        .then(function(res){ res.text().then((json)=>{console.log(json)}); })
+        .catch(function(res){ console.log("Nuuu... " + res) })
+      }
+      createTempStream();
+
+      function copyStreamKey() {
+        
+      }
+    </script>
+  </body>
+</html>

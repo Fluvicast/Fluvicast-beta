@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"-->
+    <link rel="stylesheet" href="/css/bootstrap-4.4.1.css" />
+    <link rel="stylesheet" href="/fa/css/all.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white" style="background-image:linear-gradient(#eee, #fff, #fff, #eee, #ccc, #ddd, #bbb)">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown link
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="Loader">
+      <div class="d-flex justify-content-center align-items-center fullscreen opaque">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+
+    <noscript>
+      <div class="d-flex justify-content-center align-items-center fullscreen" style="background-color:#000d;color:#fff">
+        <div class="text-center container-xl">
+          <h2 class="display-3">
+            Sorry, we need Javascript :(
+          </h2>
+          <br/>
+          <p class="lead">
+            Looks like you have Javascript disabled. Many features on this website - for example, the HLS stream reader for livestreams - cannot run without Javascript. Please enable Javascript or use a compatible navigator.
+          </p>
+          <br/>
+          <p>
+            <b>Free software activist?</b> All the Javascript code and third-party libraries are available! Find them <a href="#">here</a>.
+          </p>
+          <br/><br/>
+        </div>
+      </div>
+    </noscript>
+
+    <br/><br/><br/>
+
+    <div id="app_container" style="background-image:linear-gradient(#fff,#ddd);">
+
+      <div class="container">
+        <div class="video-container shadow">
+          <video id="video"></video>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col">
+
+            <div id="newcomment" class="rounded border shadow p-3" style="background-color: #fff;">
+              <h4 style="min-width:480px;">Add a comment</h4>
+              <form id="addComment">
+                <textarea id="newComment" class="form-control" name="content" rows="4" required></textarea id="addComment">
+              </form>
+              <button id="postComment" onclick="return false;" class="btn btn-primary m-3">Send comment</button>
+            </div>
+
+            <div id="comments" class="rounded shadow">
+
+            </div>
+            <br/><br/>
+          </div>
+          <div class="col-lg-4 comments">
+            <div id="recommendations" class="rounded shadow" style="background-color: #fff;">
+              
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div aria-live="polite">
+      <div id="notifs" style="position: fixed; bottom: 0; right: 0; padding: 25px; z-index:1;">
+        
+      </div>
+    </div>
+
+    <script>
+      var ctxId = 1;
+      document.cookie = "session=test_person";
+      var me = "test_person";
+    </script>
+    <!--script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script-->
+    <script src="/js/vendor/jquery-3.4.1.js"></script>
+    <script src="/js/vendor/popper-1.16.0.js"></script>
+    <script src="/js/vendor/bootstrap-4.4.1.js"></script>
+    <script src="/js/vendor/react-16.js"></script>
+    <script src="/js/vendor/react-dom-16.13.1.js"></script>
+    <script src="/js/vendor/babel-6.26.0.js"></script>
+    <script src="/js/vendor/hls.js"></script>
+    <!--script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></!--script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script-->
+    <script>
+      var video = document.getElementById('video');
+      
+      var hls = undefined;
+
+      function changeStream(streamname, quality) {
+        if(Hls.isSupported()) {
+          if (hls != undefined) {
+            hls.destroy();
+          }
+          hls = new Hls();
+          hls.loadSource('http://192.168.56.101:1844/' + quality + '/' + streamname + '.m3u8');
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED,function() {
+            video.play();
+          });
+
+          hls.on(Hls.Events.ERROR, function (event, data) {
+            console.log("error detected")
+            console.log(data)
+          if (data.fatal) {
+            switch(data.type) {
+            case Hls.ErrorTypes.NETWORK_ERROR:
+            // try to recover network error
+              console.log("fatal network error encountered, try to recover");
+              hls.startLoad();
+              break;
+            case Hls.ErrorTypes.MEDIA_ERROR:
+              console.log("fatal media error encountered, try to recover");
+              hls.recoverMediaError();
+              break;
+            default:
+            // cannot recover
+              hls.destroy();
+              console.log("unrecoverable error")
+              break;
+            }
+          }
+        });
+
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = 'http://192.168.56.101:1844/' + quality + '/' + streamname + '/index.m3u8';
+          video.addEventListener('loadedmetadata',function() {
+            video.play();
+          });
+        }
+      }
+
+      changeStream(/*'user/index'*/ 'qs/i8qrwlwNf', 'hls');
+    </script>
+    <script type="text/babel" src="/js/reaction.js"></script>
+    <script type="text/babel" src="/js/notification.js"></script>
+    <script type="text/babel" src="/js/suggestion.js"></script>
+    <script type="text/babel" src="/js/clearload.js"></script>
+  </body>
+</html>

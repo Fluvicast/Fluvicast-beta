@@ -1,0 +1,9 @@
+
+.main-nav {
+    box-shadow:0 0 10px #0003;
+    background-color:#fff;
+}
+
+#dashboard-leftbar {
+    border-right:1px solid #0003;
+}
