@@ -51,7 +51,7 @@ class Reactions extends React.Component {
       newstate.reactions[emote] = !this.state.reactions[emote]
       this.setState(newstate);
 
-      $.ajax('/api/reactions/' + ctxId + "/" + this.props.id, {
+      $.ajax('/api/comments/reactions/' + ctxId + "/" + this.props.id, {
         method: "POST",
         data: JSON.stringify({emote: emote, toggle: newstate.reactions[emote]}),
         contentType: "application/json"

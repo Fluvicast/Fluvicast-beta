@@ -215,19 +215,23 @@ body {
 .dropzone {
     position:relative;
     border:5px dashed lightgrey;
-    display:block;
+    display:none;
     width:calc(100% - 50px);
     height:calc(100% - 106px);
-    border-radius: 15px;
-    text-align: center;
+    border-radius:15px;
+    text-align:center;
     margin:25px;
     padding:25px;
-    z-index: 11100;
+    z-index:11100;
+}
+
+#dashboard-content:empty ~ .dropzone {
+    display:block;
 }
 
 .dropzone *{
     position:relative;
-    z-index: 11100;
+    z-index:11100;
 }
 
 progress{

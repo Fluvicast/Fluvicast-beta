@@ -21,11 +21,9 @@ class VideoVignette extends React.Component {
     }
 }
 
-/*
 const dashboard = document.querySelector('#dashboard-content');
 for (var i = 0; i < 10; i++) {
     var node = document.createElement("div");
     ReactDOM.render((<VideoVignette title="Lorem Ipsum" />), node);
     dashboard.appendChild(node.firstChild);
 }
-*/

@@ -1,3 +1,5 @@
+const db = require('../utils/db.js')
+const crypto = require('crypto');
 
 exports.getUser = function (req) {
 
