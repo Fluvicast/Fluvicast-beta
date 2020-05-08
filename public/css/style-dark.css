@@ -1,20 +1,20 @@
 
 body {
-    background-color:#001;
+    background-color:#100800;
     color:white;
 }
 
 .main-nav {
-    background-color:#001;
+    background-color:#100800;
 }
 
 #dashboard-leftbar {
-    background-color:#040816;
+    background-color:#100804;
     color:#ddf;
 }
 
 #dashboard-leftbar li.current {
-    background-color:#223;
+    background-color:#302820;
 }
 
 #dashboard-leftbar hr {
@@ -22,10 +22,10 @@ body {
 }
 
 #dashboard-rightbar {
-    background-color:#040816;
+    background-color:#100804;
 }
 
 .dropdown-menu {
-    background-color: #112;
-    border:1px solid #223;
+    background-color: #201810;
+    border:1px solid #302820;
 }

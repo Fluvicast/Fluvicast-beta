@@ -8,7 +8,7 @@ exports.bind = (app, root) => {
       if (success) {
         var streamKey = crypto.createHash('md5').update(id).digest('hex');
         var streamUrl = crypto.createHash('sha256').update(id).digest('base64').substr(1,9).replace(/[^a-zA-Z0-9]/g,"_");
-        db.insertOne("streams", { id: id, streamKey: streamKey, url: "qs/" + streamUrl }, function (success, resp) {
+        db.insertOne("streams", { id: id, streamKey: streamKey, url: "qs-" + streamUrl }, function (success, resp) {
           if (success) {
             res.status(201).send('{"key":"' + streamKey + '","url":"' + streamUrl + '"}');
 

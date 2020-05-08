@@ -3,21 +3,22 @@ const crypto = require('crypto');
 
 exports.getUser = function (req) {
 
-        var cookies = req.headers.cookie;
-        if (!cookies) return null;
+    var cookies = req.headers.cookie;
+    if (!cookies) return null;
 
-        cookies = cookies.split("; ");
+    cookies = cookies.split("; ");
 
-        var sessionToken = undefined;
+    var sessionToken = undefined;
 
-        cookies.forEach((o) => {
-            if (o.startsWith("session=")) {
-                sessionToken = o.substr(8);
-            }
-        })
-
-        if (typeof(sessionToken) != "string") {
-            return null;
+    cookies.forEach((o) => {
+        
+        if (o.startsWith("session=")) {
+            sessionToken = o.substr(8);
         }
-        return sessionToken;
+    })
+
+    if (typeof(sessionToken) != "string") {
+        return null;
     }
+    return sessionToken;
+}

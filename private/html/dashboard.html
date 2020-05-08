@@ -1,0 +1,52 @@
+<div id="dashboard-container">
+  <div id="dashboard-leftbar">
+    <nav>
+      <ul>
+        <li><i class="fas fa-globe p-2"></i>Overview</li>
+        <hr/>
+        <li class="current"><i class="fas fa-photo-video p-2"></i>Videos</li>
+        <li><i class="fas fa-wifi p-2"></i>Streams</li>
+        <li><i class="fas fa-podcast p-2"></i>Channels</li>
+        <hr/>
+        <li><i class="fas fa-users p-2"></i>Audience</li>
+        <li><i class="fas fa-user-friends p-2"></i>Partners</li>
+        <li><i class="fas fa-money-bill-wave p-2"></i>Advertisements</li>
+        <li><i class="fas fa-chart-line p-2"></i>Analytics</li>
+        <hr/>
+        <li><i class="fas fa-tv p-2"></i>View my channel</li>
+      </ul>
+    </nav>
+  </div>
+  <div id="dashboard-main">
+    <h2>My content</h2>
+    <hr/>
+    
+    
+    <div id="dashboard-content" class="d-flex flex-wrap justify-content-start"></div>
+    
+
+    <div id="drop-area" class="dropzone display-if-empty">
+      <form style="height:100%">
+        <input id="fileElem" type="file" style="display:none;"/>
+        <div class="d-flex justify-content-center" style="height:100%">
+          <div class="d-flex flex-column justify-content-center">
+            <div style="color:lightgrey;">
+              <i class="fas fa-download" style="font-size:48px;"></i>
+              <h3>Drag and drop videos here to upload</h3>
+              <p>You can also click this box to open a dialog window</p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="fullscreen nomouse file-cover"></div>
+  </div>
+  <div id="dashboard-rightbar">
+    
+  </div>
+</div>
+
+<progress id="progress-bar" max=100 value=0></progress>
+
+<script src="/js/file-dropzone.js"></script>

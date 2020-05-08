@@ -4,6 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const crypto = require('crypto');
 const fs = require('fs');
+const cookieParser = require('cookie-parser')
 
 const app = express()
 const port = 3000
@@ -23,6 +24,7 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(bodyParser.urlencoded())
 app.use(express.static('public'))
+app.use(cookieParser())
 
 local_app.use(express.json())
 local_app.use(bodyParser.urlencoded())
@@ -36,6 +38,7 @@ local_app.post('/internal/streamauth', (req, res) => {
         db.findOne("streams", {streamKey: streamkey}, (success, stream) => {
             if (success && stream && stream.url) {
                 res.status(302).set('Location', 'rtmp://127.0.0.1/hls/' + stream.url).send();
+                console.log(stream.url)
             } else {
                 res.status(404).send();
             }

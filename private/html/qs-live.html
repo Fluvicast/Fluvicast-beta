@@ -1,0 +1,99 @@
+<div id="app_container" style="background-image:linear-gradient(#fff,#ddd);">
+
+  <div class="container">
+    <div class="video-container shadow">
+      <video id="video"></video>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col">
+
+        <div id="newcomment" class="rounded border shadow p-3" style="background-color: #fff;">
+          <h4 style="min-width:480px;">Add a comment</h4>
+          <form id="addComment">
+            <textarea id="newComment" class="form-control" name="content" rows="4" required></textarea id="addComment">
+          </form>
+          <button id="postComment" onclick="return false;" class="btn btn-primary m-3">Send comment</button>
+        </div>
+
+        <div id="comments" class="rounded shadow">
+
+        </div>
+        <br/><br/>
+      </div>
+      <div class="col-lg-4 comments">
+        <div id="recommendations" class="rounded shadow" style="background-color: #fff;">
+          
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<div aria-live="polite">
+  <div id="notifs" style="position: fixed; bottom: 0; right: 0; padding: 25px; z-index:1;">
+    
+  </div>
+</div>
+
+<script src="/js/vendor/hls.js"></script>
+<script>
+  var ctxId = 17;
+  document.cookie = "session=test_person";
+  var me = "test_person";
+</script>
+<script>
+  var video = document.getElementById('video');
+  
+  var hls = undefined;
+
+  function changeStream(streamname, quality) {
+    if(Hls.isSupported()) {
+      if (hls != undefined) {
+        hls.destroy();
+      }
+      hls = new Hls();
+      hls.loadSource('http://192.168.56.101/' + quality + '/' + streamname + '/index.m3u8');
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED,function() {
+        video.play();
+      });
+
+      hls.on(Hls.Events.ERROR, function (event, data) {
+        console.log("error detected")
+        console.log(data)
+      if (data.fatal) {
+        switch(data.type) {
+        case Hls.ErrorTypes.NETWORK_ERROR:
+        // try to recover network error
+          console.log("fatal network error encountered, try to recover");
+          hls.startLoad();
+          break;
+        case Hls.ErrorTypes.MEDIA_ERROR:
+          console.log("fatal media error encountered, try to recover");
+          hls.recoverMediaError();
+          break;
+        default:
+        // cannot recover
+          hls.destroy();
+          console.log("unrecoverable error")
+          break;
+        }
+      }
+    });
+
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = 'http://192.168.56.101/' + quality + '/' + streamname + '/index.m3u8';
+      video.addEventListener('loadedmetadata',function() {
+        video.play();
+      });
+    }
+  }
+
+  changeStream(/*'user'*/ '{{STREAM_URL}}', 'hls');
+</script>
+<script type="text/babel" src="/js/reaction.js"></script>
+<script type="text/babel" src="/js/notification.js"></script>
+<script type="text/babel" src="/js/suggestion.js"></script>
+<script type="text/babel" src="/js/clearload.js"></script>
+

@@ -6,26 +6,29 @@
     <link rel="stylesheet" href="/fa/css/all.css">
     <link rel="stylesheet" href="/css/bootstrap-4.4.1.css" />
     <link rel="stylesheet" href="/css/style.css">
-    <link id="doc_csstheme" rel="stylesheet" href="/css/style-ocean.css">
-    <title id="doc_title"></title>
+    <link id="doc_csstheme" rel="stylesheet" href="/css/style-{{CURR_THEME}}.css">
+    <title id="doc_title">Fluvicast - The free-as-in-freedom broadcasting site!</title>
+    <script src="/js/vendor/jquery-3.4.1.js"></script>
+    <script src="/js/vendor/popper-1.16.0.js"></script>
+    <script src="/js/vendor/bootstrap-4.4.1.js"></script>
+    <script src="/js/vendor/react-16.js"></script>
+    <script src="/js/vendor/react-dom-16.13.1.js"></script>
+    <script src="/js/vendor/babel-6.26.0.js"></script>
   </head>
   <body>
     
     <nav class="navbar navbar-expand navbar-dark main-nav">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">Fluvicast</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <a class="nav-link" href="/quickstream">Quickstreams</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -64,16 +67,26 @@
       </div>
     </nav>
 
-    <div id="app">
-      {{CONTENT}}
-    </div>
-
-    <script src="/js/vendor/jquery-3.4.1.js"></script>
-    <script src="/js/vendor/popper-1.16.0.js"></script>
-    <script src="/js/vendor/bootstrap-4.4.1.js"></script>
-    <script src="/js/vendor/react-16.js"></script>
-    <script src="/js/vendor/react-dom-16.13.1.js"></script>
-    <script src="/js/vendor/babel-6.26.0.js"></script>
+    <noscript>
+      <div class="d-flex justify-content-center align-items-center fullscreen" style="background-color:#000d;color:#fff">
+        <div class="text-center container-xl">
+          <h2 class="display-3">
+            Sorry, we need Javascript :(
+          </h2>
+          <br/>
+          <p class="lead">
+            Looks like you have Javascript disabled. Many features on this website - for example, the HLS stream reader for livestreams - cannot run without Javascript. Please enable Javascript or use a compatible navigator.
+          </p>
+          <br/>
+          <p>
+            <b>Free software activist?</b> All the Javascript code and third-party libraries are available! Find them <a href="#">here</a>.
+          </p>
+          <br/><br/>
+        </div>
+      </div>
+    </noscript>
+    
+    {{CONTENT}}
 
     <script>
       $('.set-tooltip').tooltip({});
