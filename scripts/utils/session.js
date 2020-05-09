@@ -1,6 +1,7 @@
 const db = require('../utils/db.js')
 const crypto = require('crypto');
 
+// TODO : Update this to use the cookie middleware
 exports.getUser = function (req) {
 
     var cookies = req.headers.cookie;

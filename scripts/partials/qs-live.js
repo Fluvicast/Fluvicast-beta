@@ -2,7 +2,7 @@ const fs = require('fs');
 
 exports.getPartial = function(urlfrag, req, res, parentData) {
 
-  fs.readFile(__dirname + "/../../private/html/qs-live.html", "utf8", function(err, data){
+  fs.readFile(__dirname + "/../../private/html/watch.html", "utf8", function(err, data){
 
     var stream_url = urlfrag.shift();
     console.log(stream_url)
