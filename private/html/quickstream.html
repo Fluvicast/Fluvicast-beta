@@ -2,6 +2,7 @@
   <br/>
   <h1 class="display-2">Start a quick stream</h1>
   <hr>
+  <p><strong>Stream url : </strong><code style="background-color: #4008;padding:5px;padding-bottom:0;">rtmp://fluvicast.com/live</code></p>
   <p style="font-size:36px">
     <input id="streamkey" type="password" readonly value="" style="padding:0;width:350px;text-align:center"/>
   </p>
@@ -21,7 +22,7 @@
   <br/>
   <hr/>
   <br/>
-  <p class="text-muted" style="max-width:480px;margin:auto;">
+  <p class="text-muted" style="max-width:480px;margin:auto;display:none;">
     NOTE : Do not share private information during quick streams. The fact that the streams are unlisted on the main site doesn't mean they are perfectly protected from indiscrete eyes. For private streams, please <a href="#">create an account</a>.
     <br/><br/>
     Remember that the sites rules apply on quick streams. Moderators can and will review quick streams if there is suspicion that a stream might infringe the rules.
@@ -52,14 +53,13 @@
       },
       method: "POST",
       body: JSON.stringify({})
-    })
-    .then(function(res){ res.text().then((json)=>{
-      json = JSON.parse(json);
-      $('#streamkey')[0].value = json.key;
-      $('#streamurl')[0].innerHTML = '<a href="https://fluvicast.com/live/' + json.url + '" targer="_blank">https://fluvicast.com/live/' + json.url + '</a>';
-    }); })
-    .catch(function(res){
-      //console.log("Nuuu... " + res)
+    }).then(function(res){
+      res.text().then((json)=>{
+        json = JSON.parse(json);
+        $('#streamkey')[0].value = json.key;
+        $('#streamurl')[0].innerHTML = '<a href="https://fluvicast.com/live/' + json.url + '" targer="_blank">https://fluvicast.com/live/' + json.url + '</a>';
+      });
+    }).catch(function(res){
       alert('Could not generate stream key. Please report this error to the devs, with a screenshot of the console (press F12).');
     })
   }

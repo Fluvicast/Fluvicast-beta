@@ -25,3 +25,7 @@ body {
 #dashboard-rightbar {
     background-image: radial-gradient(circle at 75% 25%, #eef, #bbf);
 }
+
+#global-lead {
+    background-image: radial-gradient(circle at 100% 250%, #8df, #23b);
+}

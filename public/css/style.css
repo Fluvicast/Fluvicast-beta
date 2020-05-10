@@ -22,6 +22,10 @@ body {
     left:0;
 }
 
+.minfullhgt {
+    min-height: calc(100% - 56px);
+}
+
 #app {
     min-height: 100vh;
     margin: 0;
@@ -275,7 +279,6 @@ progress[value="0"]{
 }
 
 #global-lead {
-    background-image: radial-gradient(circle at 100% 250%, #8df, #23b);
     min-height:calc(100% - 56px);
     color:white;
 }

@@ -94,17 +94,33 @@
       function setThemeLight() {
         $('#doc_csstheme')[0].href = "/css/style-light.css";
         $('.navbar-dark').addClass('navbar-light').removeClass('navbar-dark')
+        document.cookie = "theme=light";
       }
 
       function setThemeOcean() {
         $('#doc_csstheme')[0].href = "/css/style-ocean.css";
         $('.navbar-light').addClass('navbar-dark').removeClass('navbar-light')
+        document.cookie = "theme=ocean";
       }
 
       function setThemeDark() {
         $('#doc_csstheme')[0].href = "/css/style-dark.css";
         $('.navbar-light').addClass('navbar-dark').removeClass('navbar-light')
+        document.cookie = "theme=dark";
       }
+
+      function setTheme(theme) {
+        if (theme == "light") {
+          setThemeLight();
+        } else if (theme == "ocean") {
+          setThemeOcean();
+        } else if (theme == "dark") {
+          setThemeDark();
+        }
+        console.log(theme)
+      }
+
+      setTheme("{{CURR_THEME}}");
     </script>
   </body>
 </html>

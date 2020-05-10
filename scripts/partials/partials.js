@@ -2,6 +2,7 @@ const fs = require('fs');
 const quickstream = require('./quickstream.js');
 const dashboard = require('./dashboard.js');
 const qs_live = require('./qs-live.js');
+const home = require('./home.js');
 
 exports.getPartial = function(urlfrag, req, res) {
 
@@ -12,21 +13,21 @@ exports.getPartial = function(urlfrag, req, res) {
 
     switch(req.cookies.theme) {
       case "light":
-        data = data.replace("{{CURR_THEME}}", "light");
+        data = data.split("{{CURR_THEME}}").join("light"); // TODO : Check if it's possible to replaceAll without Regex (Regex has a LOT of special characters that might break plain replacement)
       break;
       case "ocean":
-        data = data.replace("{{CURR_THEME}}", "ocean");
+        data = data.split("{{CURR_THEME}}").join("ocean");
       break;
       case "dark":
-        data = data.replace("{{CURR_THEME}}", "dark");
+        data = data.split("{{CURR_THEME}}").join("dark");
       break;
       default:
-        data = data.replace("{{CURR_THEME}}", "ocean");
+        data = data.split("{{CURR_THEME}}").join("ocean");
     }
     
     switch(urlfrag.shift()) {
-      case null: case undefined: case "":
-        res.status(200).send(data);
+      case null: case undefined: case "": case "home":
+        home.getPartial(urlfrag, req, res, data);
         return;
 
       case 'dashboard':
