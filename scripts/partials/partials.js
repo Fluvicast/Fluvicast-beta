@@ -29,11 +29,11 @@ exports.getPartial = function(urlfrag, req, res) {
       case null: case undefined: case "": case "home":
         home.getPartial(urlfrag, req, res, data);
         return;
-
+/*
       case 'dashboard':
         dashboard.getPartial(urlfrag, req, res, data);
         return;
-
+*/
       case 'quickstream':
         quickstream.getPartial(urlfrag, req, res, data);
         return;

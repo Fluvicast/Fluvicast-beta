@@ -1,5 +1,8 @@
 const db = require('../utils/db.js')
 
+
+// FIXME : A user can comment without being authenticated
+// FIXME : A user can comment on an invalid video ID (ctxId), or one on which they don't have access
 exports.bind = (app, root) => {
 
   app.get(root + ':ctxId', (req, res) => {

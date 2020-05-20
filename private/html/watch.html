@@ -53,7 +53,7 @@
         hls.destroy();
       }
       hls = new Hls();
-      hls.loadSource('http://192.168.56.101/' + quality + '/' + streamname + '/index.m3u8');
+      hls.loadSource('http://fluvicast.com:1844/' + quality + '/' + streamname + '/index.m3u8');
       hls.attachMedia(video);
       hls.on(Hls.Events.MANIFEST_PARSED,function() {
         video.play();
@@ -83,7 +83,7 @@
     });
 
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = 'http://192.168.56.101/' + quality + '/' + streamname + '/index.m3u8';
+      video.src = 'http://fluvicast.com:1844/' + quality + '/' + streamname + '/index.m3u8';
       video.addEventListener('loadedmetadata',function() {
         video.play();
       });

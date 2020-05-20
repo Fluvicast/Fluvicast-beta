@@ -7,7 +7,7 @@ const fs = require('fs');
 const cookieParser = require('cookie-parser')
 
 const app = express()
-const port = 3000
+const port = 9176
 const local_app = express()
 const local_port = 23006
 
@@ -16,7 +16,7 @@ const sess = require('./scripts/utils/session.js')
 const partials = require('./scripts/partials/partials.js')
 
 var corsOptions = {
-    origin: 'http://192.168.56.101/',
+    origin: 'http://fluvicast.com/',
     optionsSuccessStatus: 200
 }
 
@@ -48,8 +48,8 @@ local_app.post('/internal/streamauth', (req, res) => {
 
 // API
 require('./scripts/sitefeats/quickstreams.js').bind(app, '/api/quickstream/');
-require('./scripts/sitefeats/comments.js').bind(app, '/api/comments/');
-require('./scripts/sitefeats/users.js').bind(app, '/api/users/');
+//require('./scripts/sitefeats/comments.js').bind(app, '/api/comments/');
+//require('./scripts/sitefeats/users.js').bind(app, '/api/users/');
 app.all('/api/*', (req, res) => {
     res.status(404).send('{"msg":"This document does not exist"}');
 });
@@ -65,12 +65,11 @@ app.get('*', (req, res) => {
 // DIRECT URL REQUEST
 app.use((req, res) => {
     fs.readFile("./private/html/base.html", "utf8", function(err, data){
-        if(err) throw err;
-        data = data.replace('<div id="app">', `<div id="app"><p>This page doesn't exist.</p>`)
-        res.status(404).send(data);
+        //if(err) throw err;
+        res.status(404).send(data.replace("{{CONTENT}}", "<p>This page cannot be found.</p>"));
     });
-    // TODO: Return the monopage and print in the javascript the url to fetch (req,url)
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}! db is ${db.ready()}`))
+// Will listen only to 127.0.0.1 because there's a proxy
+app.listen(port, '127.0.0.1', () => console.log(`Example app listening on port ${port}! db is ${db.ready()}`))
 local_app.listen(local_port, '127.0.0.1');

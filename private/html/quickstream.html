@@ -57,7 +57,7 @@
       res.text().then((json)=>{
         json = JSON.parse(json);
         $('#streamkey')[0].value = json.key;
-        $('#streamurl')[0].innerHTML = '<a href="https://fluvicast.com/live/' + json.url + '" targer="_blank">https://fluvicast.com/live/' + json.url + '</a>';
+        $('#streamurl')[0].innerHTML = '<a href="/live/' + json.url + '" targer="_blank">https://fluvicast.com/live/' + json.url + '</a>';
       });
     }).catch(function(res){
       alert('Could not generate stream key. Please report this error to the devs, with a screenshot of the console (press F12).');
