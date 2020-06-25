@@ -290,3 +290,43 @@ progress[value="0"]{
     font-size:12px;
     text-shadow:0 0 25px black;
 }
+
+#img-bkg {
+    background:url('/i/bkg.jpg');
+    background-size:cover;
+    border-top:2px solid #004;
+    background-attachment:fixed;
+    min-height:calc(100vh - 56px);
+}
+
+#img-form {
+    background-color:#fffa;
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    max-width:768px;
+    border-radius:0 0 25px 25px;
+    padding:25px;
+    margin-bottom:25px;
+}
+
+.light-with-shadow {
+    color:white;
+    text-shadow: 0 0 0.5rem black;
+}
+
+.light-with-shadow a {
+    color:white;
+    text-decoration: underline;
+    text-shadow: 0 0 0.5rem black;
+}
+
+.has-button {
+    display:inline;
+    padding-right: 45px;
+}
+
+.has-button ~ button {
+    margin-left: -45px;
+    border: none;
+    background: none;
+}

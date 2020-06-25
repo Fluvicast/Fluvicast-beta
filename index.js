@@ -5,29 +5,41 @@ const bodyParser = require('body-parser')
 const crypto = require('crypto');
 const fs = require('fs');
 const cookieParser = require('cookie-parser')
+const helmet = require('helmet')
+const referrerPolicy = require('referrer-policy')
 
 const app = express()
 const port = 9176
 const local_app = express()
 const local_port = 23006
+const user_app = express()
+const user_port = 9177
 
 const db = require('./scripts/utils/db.js')
 const sess = require('./scripts/utils/session.js')
 const partials = require('./scripts/partials/partials.js')
+const usersites = require('./scripts/usersites/index.js')
 
 var corsOptions = {
     origin: 'http://fluvicast.com/',
     optionsSuccessStatus: 200
 }
 
+app.use(helmet())
 app.use(cors(corsOptions))
 app.use(express.json())
 app.use(bodyParser.urlencoded())
 app.use(express.static('public'))
 app.use(cookieParser())
+app.use(referrerPolicy({ policy: 'same-origin' }))
 
+// Not needed, it will only be accessed by Nginx itself. No need to be IE-proof :)
+// local_app.use(helmet())
 local_app.use(express.json())
 local_app.use(bodyParser.urlencoded())
+
+user_app.use(helmet())
+user_app.use(referrerPolicy({ policy: 'same-origin' }))
 
 local_app.post('/internal/streamauth', (req, res) => {
     if (req.connection.remoteAddress == "127.0.0.1"
@@ -70,6 +82,17 @@ app.use((req, res) => {
     });
 });
 
+// User websites (fluvicast.me)
+user_app.all('*', (req, res) => {
+    usersites.handle(req, res);
+});
+
 // Will listen only to 127.0.0.1 because there's a proxy
-app.listen(port, '127.0.0.1', () => console.log(`Example app listening on port ${port}! db is ${db.ready()}`))
+app.listen(port, '127.0.0.1');
 local_app.listen(local_port, '127.0.0.1');
+user_app.listen(user_port/*, '127.0.0.1'*/);
+
+// Call the worker each hour
+const worker = require('./scripts/utils/worker.js');
+setInterval(() => worker.work(), 3600000);
+worker.work();

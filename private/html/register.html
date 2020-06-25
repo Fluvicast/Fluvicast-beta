@@ -1,0 +1,106 @@
+<div id="img-bkg">
+  <div id="img-form" class="container">
+    <h1 style="text-align:center">Register</h1>
+    <hr/>
+    <br/>
+    <p>Welcome to Fluvicast!</p>
+    <p>Registering will allow you to keep track of your favorite channels, as well as allow you to actively participate in the community by commenting, rating, chatting, and more! You can also upload your creations, manage channels and reach your audience as efficiently as possible!</p>
+    <p>Because <strong>Fluvicast is not-for-profit</strong>, serving you the way YOU want isn't conflicting with other interests such as generating revenues for us. Fluvicast is made by the community that runs it, which means your interests are our only interests!</p>
+    <hr/>
+    <br/>
+    <p>To create an account, please fill the form below.</p>
+    <form>
+      <div class="form-group">
+        <!-- CSRF mitigation -->
+        <input type="hidden" name="csrf" value="1-register-{{CSRF_TOKEN}}">
+        <label for="text">Username</label>
+        <input type="email" class="form-control" id="uname" aria-describedby="uname_desc">
+        <small id="uname_desc" class="form-text text-muted">5 to 20 characters, only lowercase letters and numbers</small>
+      </div>
+      <div class="form-group">
+        <label for="uname">Email &nbsp; <small style="color:#0007;vertical-align:text-top">(optional)</small></label>
+        <input type="email" class="form-control" id="uname" aria-describedby="uname_desc">
+        <small id="uname_desc" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="pw1">Password</label>
+        <input type="password" class="form-control has-button" id="pw1" aria-describedby="pw_desc" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$">
+        <button onclick="generatePassword();return false;"><i class="fas fa-sync-alt"></i></button>
+        <small id="pw_desc" class="form-text text-muted">Pick at least 12 characters, including an uppercase letter, a lowercase letter, a number, and a symbol.</small>
+      </div>
+      <div class="form-group form-check">
+        <input id="tos_chk" type="checkbox" class="form-check-input set-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="&lt;b&gt;READ THE TERMS!&lt;/b&gt;" id="readTos">
+        <label class="form-check-label" for="readTos">I have read, understood and agreed to the Terms of Service</label>
+      </div>
+      <input type="submit" class="btn btn-primary" value="Submit" />
+    </form>
+  </div>
+  <div class="text-center light-with-shadow">
+    <small>This website is available under the terms of the <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">GNU AGPL</a> - find the source code <a href="#">here</a></small>
+  </div>
+  <br class="spacer" />
+</div>
+
+
+
+<div class="modal fade" id="tos_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><strong>Did you <em>really</em> read the Terms of Service?</strong></h5>
+        <!--button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button-->
+      </div>
+      <div class="modal-body">
+        <h5>Please. It really is important to us.</h4>
+        <p>The Terms of Service are the basic rules of the site. We <em>really</em> need you to read them. There are so many moderation cases that could be avoided simply by reading and understanding the Terms.</p>
+        <p>We made our Terms as easy to read as possible. We even included some funny notes to keep you entertained while you read them.</p>
+        <p>If you already read the Terms of Service, click "I already read the Terms of Service".</p>
+        <p><strong>If you don't read the Terms of Service, don't complain if we take action against you based on a rule you didn't know about!</strong></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">I already read the Terms of Service</button>
+        <button type="button" class="btn btn-primary">Read the Terms of Service</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+$("#tos_chk").click(()=>{
+  $('#tos_modal').modal('show');
+})
+
+function generatePassword() {
+  var pw = "";
+
+  for (var i = 0; i < 8; i++) {
+    // That function uses Base64 encoding to get a random
+    // lowercase letter, uppercase letter, or number.
+    // Change 248 to 256 to include the symbos "+" and "/".
+    pw = pw + btoa(String.fromCharCode(Math.random()*255)).substr(0,1);
+  }
+
+  // Add one lowercase letter, one uppercase letter, one number and one symbol to make sure they exist
+  var pos;
+
+  pos = Math.floor(Math.random()*9)
+  pw = pw.slice(0, pos) + String.fromCharCode(Math.random()*26+97) + pw.slice(pos);
+
+  pos = Math.floor(Math.random()*10)
+  pw = pw.slice(0, pos) + String.fromCharCode(Math.random()*26+65) + pw.slice(pos);
+
+  pos = Math.floor(Math.random()*11)
+  pw = pw.slice(0, pos) + String.fromCharCode(Math.random()*10+48) + pw.slice(pos);
+
+  pos = Math.floor(Math.random()*12)
+  pw = pw.slice(0, pos) + String.fromCharCode(Math.random()*13+33) + pw.slice(pos);
+
+  console.log(pw);
+
+  $("#pw1")[0].value = pw;
+}
+
+</script>

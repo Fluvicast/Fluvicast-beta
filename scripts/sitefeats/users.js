@@ -4,6 +4,10 @@ const crypto = require('crypto');
 exports.bind = (app, root) => {
 
   app.post(root + 'register', (req, res) => {
+
+    // Check CSRF
+    
+
     var username = req.body.username;
     var email = req.body.email || "";
     var phone = req.body.phone || "";

@@ -3,6 +3,7 @@ const quickstream = require('./quickstream.js');
 const dashboard = require('./dashboard.js');
 const qs_live = require('./qs-live.js');
 const home = require('./home.js');
+const register = require('./register.js');
 
 exports.getPartial = function(urlfrag, req, res) {
 
@@ -40,6 +41,10 @@ exports.getPartial = function(urlfrag, req, res) {
 
       case 'live':
         qs_live.getPartial(urlfrag, req, res, data);
+        return;
+
+      case 'register':
+        register.getPartial(urlfrag, req, res, data);
         return;
 
       default:

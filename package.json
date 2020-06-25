@@ -1,6 +1,6 @@
 {
-  "name": "api",
-  "version": "0.0.1",
+  "name": "fluvicast",
+  "version": "0.0.2",
   "description": "Sample MERN application",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "start": "node index.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "AGPL",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.0",
     "body-parser": "^1.19.0",
@@ -16,6 +16,7 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "helmet": "^3.23.1",
     "mongodb": "^3.5.2"
   }
 }
