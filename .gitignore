@@ -1,3 +1,13 @@
+## FLUVICAST-SPECIFIC
+## ====================
+
+# Downloadable archive
+public/download-src.zip
+
+
+## GITHUB DEFAULTS
+## ====================
+
 # Logs
 logs
 *.log

@@ -2,11 +2,11 @@
 
 # WIP - Prepares the server for Fluvicast stuff
 
-# Make the folders for user videos
-mkdir /var/u-fluvicast/
-mkdir /var/u-fluvicast/users
-mkdir /var/u-fluvicast/vod/
+echo "Making folders for user content..."
+mkdir -p /var/u-fluvicast/
+mkdir -p /var/u-fluvicast/users
+mkdir -p /var/u-fluvicast/vod/
 
-# Make the folders for the SSL files
-mkdir /etc/fluvicast/
-mkdir /etc/fluvicast/ssl/
+echo "Making the folders for the SSL files..."
+mkdir -p /etc/fluvicast/
+mkdir -p /etc/fluvicast/ssl/
