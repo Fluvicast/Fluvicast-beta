@@ -1,5 +1,6 @@
 const db = require('../utils/db.js')
 const crypto = require('crypto');
+const fs = require('fs');
 
 exports.bind = (app, root) => {
 
@@ -7,6 +8,34 @@ exports.bind = (app, root) => {
 
     // Check CSRF
     
+
+    // Prepare response
+    function respond(code) {
+      switch(req.accepts(['html', 'json'])) {
+
+        // JSON response (with JS-enabled browsers and third-party clients)
+        case 'json':
+          if (code.error) {
+            res.status(400).send(code);
+          } else {
+            res.status(201).send(code);
+          }
+          break;
+        
+        // HTML response (with JS-disabled browsers)
+        case 'html':
+        default:
+
+          if (code.error) {
+            res.status(303).set('Location', '/register?error=' + encodeURIComponent(code.msg)).send();
+          } else {
+            res.status(303).set('Location', '/register-confirm').send();
+          }
+
+          break;
+
+      }
+    }
 
     var username = req.body.username;
     var email = req.body.email || "";
@@ -25,19 +54,19 @@ exports.bind = (app, root) => {
           db.insertOne("users", { id: id, username: username, password: password, streamKey: "", email: email, phone: phone }, function (success, resp) {
             if (success) {
               // TODO: Handle success...
-              console.log("Registered");
+              respond({error: false});
             } else {
               // TODO: Handle error
-              console.log("Reg fail 1");
+              respond({error: true, code: 3, msg: "Internal failure : Could not save user. Please try again. If it fails multiple times, please contact the administrators."});
             }
           });
         } else {
           // TODO: Handle error
-          console.log("Reg fail 2");
+          respond({error: true, code: 2, msg: "Internal failure : Could not generate user ID. Please try again. If it fails multiple times, please contact the administrators."});
         }
       });
     } else {
-      res.status(400).send('{"msg":"Malformed request; please create an account using the web interface"}')
+      respond({error: true, code: 1, msg: "One of the fields was incorrectly formatted, or a required field was missing. Please double-check."});
     }
 
   });

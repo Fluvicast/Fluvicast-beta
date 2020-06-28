@@ -4,39 +4,44 @@
     <hr/>
     <br/>
     <p>Welcome to Fluvicast!</p>
-    <p>Registering will allow you to keep track of your favorite channels, as well as allow you to actively participate in the community by commenting, rating, chatting, and more! You can also upload your creations, manage channels and reach your audience as efficiently as possible!</p>
+    <p>Registering will allow you to keep track of your favorite channels, as well as actively participating in the community by commenting, rating, chatting, and more! You can also upload your creations, manage channels and reach your audience as efficiently as possible!</p>
     <p>Because <strong>Fluvicast is not-for-profit</strong>, serving you the way YOU want isn't conflicting with other interests such as generating revenues for us. Fluvicast is made by the community that runs it, which means your interests are our only interests!</p>
     <hr/>
     <br/>
     <p>To create an account, please fill the form below.</p>
-    <form>
+    <!--{{ERROR_MSG}}-->
+    <form action="/api/users/register" method="post">
+      <!-- CSRF mitigation -->
+      <input type="hidden" name="csrf" value="1-register-{{CSRF_TOKEN}}">
       <div class="form-group">
-        <!-- CSRF mitigation -->
-        <input type="hidden" name="csrf" value="1-register-{{CSRF_TOKEN}}">
         <label for="text">Username</label>
-        <input type="email" class="form-control" id="uname" aria-describedby="uname_desc">
-        <small id="uname_desc" class="form-text text-muted">5 to 20 characters, only lowercase letters and numbers</small>
+        <input name="username" type="text" class="form-control" id="uname" aria-describedby="uname_desc" pattern="^[a-z0-9]{6,30}$">
+        <small id="uname_desc" class="form-text text-muted">6 to 30 characters, only lowercase letters and numbers</small>
       </div>
       <div class="form-group">
         <label for="uname">Email &nbsp; <small style="color:#0007;vertical-align:text-top">(optional)</small></label>
-        <input type="email" class="form-control" id="uname" aria-describedby="uname_desc">
+        <input name="email" type="email" class="form-control" id="uname" aria-describedby="uname_desc">
         <small id="uname_desc" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
       <div class="form-group">
         <label for="pw1">Password</label>
-        <input type="password" class="form-control has-button" id="pw1" aria-describedby="pw_desc" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$">
+        <input name="password1" type="password" class="form-control has-button" id="pw1" aria-describedby="pw_desc" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$">
         <button onclick="generatePassword();return false;"><i class="fas fa-sync-alt"></i></button>
         <small id="pw_desc" class="form-text text-muted">Pick at least 12 characters, including an uppercase letter, a lowercase letter, a number, and a symbol.</small>
       </div>
+      <div class="form-group">
+        <label for="pw1">Confirm password</label>
+        <input name="password2" type="password" class="form-control has-button" id="pw2" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$">
+      </div>
       <div class="form-group form-check">
-        <input id="tos_chk" type="checkbox" class="form-check-input set-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="&lt;b&gt;READ THE TERMS!&lt;/b&gt;" id="readTos">
+        <input type="checkbox" class="form-check-input set-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="&lt;b&gt;READ THE TERMS!&lt;/b&gt;" id="readTos">
         <label class="form-check-label" for="readTos">I have read, understood and agreed to the Terms of Service</label>
       </div>
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
   </div>
   <div class="text-center light-with-shadow">
-    <small>This website is available under the terms of the <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">GNU AGPL</a> - find the source code <a href="#">here</a></small>
+    <small>This website is available under the terms of the <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">GNU AGPL</a> - find the source code <a href="/download-src.zip">here</a></small>
   </div>
   <br class="spacer" />
 </div>
@@ -69,7 +74,7 @@
 
 <script>
 
-$("#tos_chk").click(()=>{
+$("#readTos").click(()=>{
   $('#tos_modal').modal('show');
 })
 
@@ -101,6 +106,7 @@ function generatePassword() {
   console.log(pw);
 
   $("#pw1")[0].value = pw;
+  $("#pw2")[0].value = pw;
 }
 
 </script>

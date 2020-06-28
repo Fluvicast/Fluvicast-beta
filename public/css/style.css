@@ -330,3 +330,13 @@ progress[value="0"]{
     border: none;
     background: none;
 }
+
+.fl-err-msg {
+    border: 3px groove red;
+    background-color: #f88;
+    background-image: linear-gradient(#d77, #f88);
+    color: #411;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: inherit;
+}

@@ -9,7 +9,7 @@ mongodb.connect(url, function(err, db) {
     if (err) throw err;
     dbo = db.db("api");
     ready = true;
-    for (request in requests) {
+    for (request of requests) {
         request();
     }
 });
@@ -90,6 +90,20 @@ exports.deleteOne = function (collection, object, callback) {
         requests.push(() => {exports.deleteOne(collection, object, callback)})
     } else {
         dbo.collection(collection).deleteOne(object, function(err, res) {
+            if (err) {
+                callback(false, err);
+            } else {
+                callback(true, res);
+            }
+        });
+    }
+};
+
+exports.deleteAll = function (collection, object, callback) {
+    if (!ready) {
+        requests.push(() => {exports.deleteAll(collection, object, callback)})
+    } else {
+        dbo.collection(collection).deleteMany(object, function(err, res) {
             if (err) {
                 callback(false, err);
             } else {

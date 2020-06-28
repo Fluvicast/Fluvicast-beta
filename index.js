@@ -61,14 +61,14 @@ local_app.post('/internal/streamauth', (req, res) => {
 // API
 require('./scripts/sitefeats/quickstreams.js').bind(app, '/api/quickstream/');
 //require('./scripts/sitefeats/comments.js').bind(app, '/api/comments/');
-//require('./scripts/sitefeats/users.js').bind(app, '/api/users/');
+require('./scripts/sitefeats/users.js').bind(app, '/api/users/');
 app.all('/api/*', (req, res) => {
     res.status(404).send('{"msg":"This document does not exist"}');
 });
 
 // PAGE SERVICE
 app.get('*', (req, res) => {
-    var url = req.url.split("/");
+    var url = req.url.split("?")[0].split("/");
     url.shift(); // first will always be empty because the string starts with a slash
 
     partials.getPartial(url, req, res);
