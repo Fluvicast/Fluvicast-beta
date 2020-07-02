@@ -60,7 +60,7 @@ local_app.post('/internal/streamauth', (req, res) => {
 
 // API
 require('./scripts/sitefeats/quickstreams.js').bind(app, '/api/quickstream/');
-//require('./scripts/sitefeats/comments.js').bind(app, '/api/comments/');
+require('./scripts/sitefeats/comments.js').bind(app, '/api/comments/');
 require('./scripts/sitefeats/users.js').bind(app, '/api/users/');
 app.all('/api/*', (req, res) => {
     res.status(404).send('{"msg":"This document does not exist"}');
@@ -96,3 +96,15 @@ user_app.listen(user_port/*, '127.0.0.1'*/);
 const worker = require('./scripts/utils/worker.js');
 setInterval(() => worker.work(), 3600000);
 worker.work();
+
+// Refresh ZIP archive of the full source code (excluding user content, SSL keys, and passwords)
+// IMPORTANT : PER THE TERMS OF THE AGPL, IF YOU MAKE A COPY OF THE SITE AVAILABLE ONLINE, YOU ARE REQUIRED
+//    TO RELEASE THE FULL SOURCE CODE AS WELL. This portion of script will do the job for you. Simply don't
+//    put server scripts outside /var/fluvicast, and do not include other content (User content, db passwords,
+//    etc.) inside /var/fluvicast. If you remove this code, YOU MUST MAKE THE FULL SOURCE CODE AVAILABLE
+//    IN SOME WAY **AND** MAKE SURE THE DOWNLOADABLE SOURCE CODE IS **ALWAYS** UP-TO-DATE.
+//    Read the AGPL (/var/fluvicast/LICENSE, or https://www.gnu.org/licenses/agpl-3.0.en.html) for more info.
+// FIXME : Requires the ZIP library to be installed on the system. Would need an alternative that wouldn't require extra installation.
+child_process.execSync(`zip -x "public/download-src.zip" -r public/download-src.zip *`, {
+    cwd: "/var/fluvicast/"
+});

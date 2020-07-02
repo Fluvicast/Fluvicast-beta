@@ -340,3 +340,48 @@ progress[value="0"]{
     border-radius: 10px;
     font-family: inherit;
 }
+
+.fl-cw-modal {
+    border-radius: 5px;
+}
+
+.fl-cw-nobtn {
+    width: 100%;
+    height:50px;
+    margin: 0px;
+    border: none;
+    background: none;
+    box-shadow: 0 -5px 25px #0003;
+    font-size: 14px;
+    color: #137;
+}
+
+.fl-cw-okbtn {
+    width: 100%;
+    height:75px;
+    margin: 0px;
+    border: none;
+    background-color: #37f;
+    font-size: 24px;
+    color: white;
+}
+
+.fl-cw-li {
+    margin: 25px;
+    margin-bottom: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5rem;
+}
+
+.fl-cw-li small {
+    margin: 0;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.fl-cw-ul {
+    display:inline-block;
+    padding:0;
+    list-style-type: none;
+}

@@ -15,29 +15,53 @@
       <input type="hidden" name="csrf" value="1-register-{{CSRF_TOKEN}}">
       <div class="form-group">
         <label for="text">Username</label>
-        <input name="username" type="text" class="form-control" id="uname" aria-describedby="uname_desc" pattern="^[a-z0-9]{6,30}$">
-        <small id="uname_desc" class="form-text text-muted">6 to 30 characters, only lowercase letters and numbers</small>
+        <div class="row">
+          <div class="col-6">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text pr-1">@</span>
+              </div>
+              <input name="username" type="text" class="form-control pl-1" id="uname" aria-describedby="uname_desc" pattern="^[a-z0-9]{6,30}$" placeholder="you123">
+            </div>
+          </div>
+          <div class="col-6">
+            <input name="username" type="text" class="form-control" id="uname" aria-describedby="uname_desc" pattern="^[ -~]{2,250}$" placeholder="You, One-two-three.">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <small id="uname_handle_desc" class="form-text text-muted">Username : 6 to 30 characters, only lowercase letters and numbers</small>
+          </div>
+          <div class="col-6">
+            <small id="uname_display_desc" class="form-text text-muted">Display name : 2 to 250 common characters (letters, numbers, spaces, common English symbols)</small>
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="uname">Email &nbsp; <small style="color:#0007;vertical-align:text-top">(optional)</small></label>
-        <input name="email" type="email" class="form-control" id="uname" aria-describedby="uname_desc">
-        <small id="uname_desc" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <input name="email" type="email" class="form-control" id="uname" aria-describedby="uname_desc" placeholder="you@your-provider">
+        <small id="uname_desc" class="form-text text-muted">Email is used as authentication method apart from the username/password system.</small>
       </div>
       <div class="form-group">
         <label for="pw1">Password</label>
-        <input name="password1" type="password" class="form-control has-button" id="pw1" aria-describedby="pw_desc" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$">
-        <button onclick="generatePassword();return false;"><i class="fas fa-sync-alt"></i></button>
+        <div class="row">
+          <div class="col">
+            <input name="password1" type="password" class="form-control has-button" id="pw1" aria-describedby="pw_desc" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$" placeholder="Password">
+            <button id="genPW" onclick="generatePassword();return false;" class="set-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="Generate password&lt;br/&gt;(will paste it to the clipboard)" style="display:none;">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+          </div>
+          <div class="col">
+            <input name="password2" type="password" class="form-control has-button" id="pw2" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$" placeholder="Confirm password">
+          </div>
+        </div>
         <small id="pw_desc" class="form-text text-muted">Pick at least 12 characters, including an uppercase letter, a lowercase letter, a number, and a symbol.</small>
-      </div>
-      <div class="form-group">
-        <label for="pw1">Confirm password</label>
-        <input name="password2" type="password" class="form-control has-button" id="pw2" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$">
       </div>
       <div class="form-group form-check">
         <input type="checkbox" class="form-check-input set-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="&lt;b&gt;READ THE TERMS!&lt;/b&gt;" id="readTos">
         <label class="form-check-label" for="readTos">I have read, understood and agreed to the Terms of Service</label>
       </div>
-      <input type="submit" class="btn btn-primary" value="Submit" />
+      <input type="submit" class="btn btn-primary" value="Register" />
     </form>
   </div>
   <div class="text-center light-with-shadow">
@@ -73,6 +97,9 @@
 </div>
 
 <script>
+
+// Show the password generator only if JS is enabled
+$("#genPW").show();
 
 $("#readTos").click(()=>{
   $('#tos_modal').modal('show');

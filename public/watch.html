@@ -108,6 +108,43 @@
       </div>
     </div>
 
+    <!-- Content warning modal -->
+    <div class="modal fade " id="cw_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content fl-cw-modal">
+          <div class="modal-header">
+            <h5 class="modal-title mx-auto text-center"><i class="fas fa-exclamation-triangle"></i> &nbsp; Content warnings</h5>
+            <button type="button" class="close">
+              <span class="sr-only">Options</span>
+              <i class="fas fa-cog"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>This video contains references or talks about the following topic(s) :</p>
+            <center>
+              <ul class="fl-cw-ul">
+                <li class="fl-cw-li">
+                  Some topic
+                  <br/>
+                  <small class="text-muted">(mentions, a few times)</small>
+                </li>
+                <li class="fl-cw-li">
+                  Some other topic
+                  <br/>
+                  <small class="text-muted">(jokes, all video)</small>
+                </li>
+              </ul>
+            </center>
+            <p>You can access more advanced filters by clicking on the gear icon at the top-right corner of the window.</p>
+          </div>
+          <div class="modal-footer px-0 pt-0 pb-0">
+            <button type="button" class="fl-cw-nobtn">Uhh, bring me back</button>
+            <button type="button" class="fl-cw-okbtn" data-dismiss="modal">I'm fine with that</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
       var ctxId = 1;
       document.cookie = "session=test_person";
@@ -129,6 +166,8 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script-->
     <script>
+
+      $('#cw_modal').modal('show');
       var video = document.getElementById('video');
       
       var hls = undefined;

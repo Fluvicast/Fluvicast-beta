@@ -1,6 +1,5 @@
 const db = require('../utils/db.js')
 const crypto = require('crypto');
-const fs = require('fs');
 
 exports.bind = (app, root) => {
 
