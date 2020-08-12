@@ -1,0 +1,8 @@
+/* This stylesheet is used to replace some basic functionnalities when the user has disabled Javascript */
+
+nav span:focus-within a ~ div {
+    display:block!important;
+}
+nav li:focus-within a ~ div {
+    display:block!important;
+}

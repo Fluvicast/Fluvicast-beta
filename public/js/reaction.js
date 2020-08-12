@@ -167,7 +167,7 @@ function sendComment() {
         data: JSON.stringify({content: $('#newComment').val()}),
         contentType: "application/json",
     });
-    var myElem = $("<div id='myComment' class='rounded border shadow mt-3 mb-3'></div>");
+    var myElem = $("<div id='myComment' class='rounded border shadow bg-light mt-3 mb-3'></div>");
     myElem.insertBefore('#comments');
     ReactDOM.render(<Comment messageid={++i} title="My comment" content={$('#newComment').val()} reactions={{}}/>, document.querySelector('#myComment'));
     $('#addComment').reset();

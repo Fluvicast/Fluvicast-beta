@@ -16,8 +16,8 @@ elseif not string.find(filename, "^[%w_%-%/]+%.lua$") then
     print('{"error":true,"message":"Not a valid file name."}')
 else
     -- Initialize MongoDB connection
-    local mongo = require('mongo')
-    local client = mongo.Client('mongodb://127.0.0.1')
+    --local mongo = require('mongo')
+    --local client = mongo.Client('mongodb://127.0.0.1')
 
     -- Read JSON data from STDIN
     local json = require('json')
@@ -76,6 +76,12 @@ else
             reverse = string.reverse,
             sub = string.sub,
             upper = string.upper,
+        },
+        table = {
+        	insert = table.insert,
+        	maxn = table.maxn,
+        	remove = table.remove,
+        	sort = table.sort,
         },
         math = {
             abs = math.abs,

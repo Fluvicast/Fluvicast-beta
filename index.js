@@ -1,4 +1,4 @@
-const fa = require('@fortawesome/fontawesome-free')
+// const fa = require('@fortawesome/fontawesome-free')
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -7,6 +7,9 @@ const fs = require('fs');
 const cookieParser = require('cookie-parser')
 const helmet = require('helmet')
 const referrerPolicy = require('referrer-policy')
+const child_process = require("child_process");
+
+const settings = require("/etc/fluvicast/config.js");
 
 const app = express()
 const port = 9176
@@ -16,7 +19,6 @@ const user_app = express()
 const user_port = 9177
 
 const db = require('./scripts/utils/db.js')
-const sess = require('./scripts/utils/session.js')
 const partials = require('./scripts/partials/partials.js')
 const usersites = require('./scripts/usersites/index.js')
 
@@ -30,7 +32,7 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(bodyParser.urlencoded())
 app.use(express.static('public'))
-app.use(cookieParser())
+app.use(cookieParser(settings.cookieSecret))
 app.use(referrerPolicy({ policy: 'same-origin' }))
 
 // Not needed, it will only be accessed by Nginx itself. No need to be IE-proof :)
@@ -105,6 +107,15 @@ worker.work();
 //    IN SOME WAY **AND** MAKE SURE THE DOWNLOADABLE SOURCE CODE IS **ALWAYS** UP-TO-DATE.
 //    Read the AGPL (/var/fluvicast/LICENSE, or https://www.gnu.org/licenses/agpl-3.0.en.html) for more info.
 // FIXME : Requires the ZIP library to be installed on the system. Would need an alternative that wouldn't require extra installation.
-child_process.execSync(`zip -x "public/download-src.zip" -r public/download-src.zip *`, {
+var archiver = child_process.exec(`zip -qx "public/download-src.zip" -r public/download-src.zip *`, {
     cwd: "/var/fluvicast/"
+}, (error, stdout, stderr) => {
+    if (error) {
+        console.log("ZIP archive creation/update error : " + error +
+        "\nIf the error is about STDOUT or STDERR being filled to maximum capacity, make sure the '-q' option is used.");
+        console.log("FATAL ERROR : Source archive cannot be created. Fluvicast is not legally allowed to run without making its source code available; terminating.");
+        process.exit(1);
+    } else {
+        console.log("ZIP archive created/updated successfully.");
+    }
 });

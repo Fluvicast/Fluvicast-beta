@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="/css/bootstrap-4.4.1.css" />
     <link rel="stylesheet" href="/css/style.css">
     <link id="doc_csstheme" rel="stylesheet" href="/css/style-{{CURR_THEME}}.css">
+    <link id="js_css_fallback" rel="stylesheet" href="/css/js-fallback.css">
+    <script id="js_css_fallback_remover">
+      // Remove the CSS fallback for basic funcitonalities if JS is enabled
+      document.head.removeChild(document.getElementById("js_css_fallback"));
+      document.head.removeChild(document.getElementById("js_css_fallback_remover"));
+    </script>
     <title id="doc_title">Fluvicast - The free-as-in-freedom broadcasting site!</title>
     <script src="/js/vendor/jquery-3.4.1.js"></script>
     <script src="/js/vendor/popper-1.16.0.js"></script>
@@ -63,11 +69,11 @@
             </button>
           </div>
         </span>
-        <small class="navbar-text">This is an Ocean project</small>
+        <small class="navbar-text">{{USER_CARD}}</small>
       </div>
     </nav>
 
-    <noscript>
+    <!--noscript>
       <div class="d-flex justify-content-center align-items-center fullscreen" style="background-color:#000d;color:#fff">
         <div class="text-center container-xl">
           <h2 class="display-3">
@@ -84,7 +90,7 @@
           <br/><br/>
         </div>
       </div>
-    </noscript>
+    </noscript-->
     
     {{CONTENT}}
 
