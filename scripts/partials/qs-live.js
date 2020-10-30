@@ -4,6 +4,9 @@ exports.getPartial = function(urlfrag, req, res, parentData) {
 
   fs.readFile(__dirname + "/../../private/html/watch.html", "utf8", function(err, data){
 
+    // TODO: Use a configuration file (probably in /etc/fluvicast)
+    data = data.replace("{{SERVER_NAME}}", "192.168.56.102");
+
     var stream_url = urlfrag.shift();
     console.log(stream_url)
     if (stream_url) {

@@ -181,6 +181,10 @@ body {
     height:100%;
 }
 
+.content-instance .img:hover > div {
+    background-color: #0003;
+}
+
 .content-instance .img button {
     background:none;
     border:none;
@@ -192,7 +196,7 @@ body {
     transition: color .25s, font-size .25s;
 }
 
-.content-instance:hover button {
+.content-instance .img:hover button {
     font-size:32px;
     color: #fff7;
     transition: color .15s, font-size .25s;
@@ -202,7 +206,8 @@ body {
     color: #fff;
 }
 
-.content-instance:hover .img {
+/*.content-instance:hover .img*/
+.content-instance .img:hover {
     margin:0;
     width:256px;
     height:160px;
@@ -216,9 +221,12 @@ body {
         height:100px;
     }
 
-    .content-instance:hover .img {
+    /*.content-instance:hover .img*/
+    .content-instance .img:hover {
+        margin:0;
         width:176px;
         height:110px;
+        box-shadow: 0 10px 25px #000b;
     }
 }
 
@@ -332,7 +340,7 @@ progress[value="0"]{
 }
 
 .fl-err-msg {
-    border: 3px groove red;
+    border: 5px groove #f77;
     background-color: #f88;
     background-image: linear-gradient(#d77, #f88);
     color: #411;

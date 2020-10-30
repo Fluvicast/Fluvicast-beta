@@ -10,30 +10,37 @@
     <br/>
     <p>To create an account, please fill the form below.</p>
     <!--{{ERROR_MSG}}-->
-    <form action="/api/users/register" method="post">
+    <form action="/api/users/register" method="post" onsubmit="return $('#pw1').value === $('#pw2').value;">
       <!-- CSRF mitigation -->
       <input type="hidden" name="csrf" value="1-register-{{CSRF_TOKEN}}">
       <div class="form-group">
-        <label for="text">Username</label>
+        <div class="row">
+          <div class="col-6">
+            <label for="uname">Username</label>
+          </div>
+          <div class="col-6">
+            <label for="dname">Display name</label>
+          </div>
+        </div>
         <div class="row">
           <div class="col-6">
             <div class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text pr-1">@</span>
               </div>
-              <input name="username" type="text" class="form-control pl-1" id="uname" aria-describedby="uname_desc" pattern="^[a-z0-9]{6,30}$" placeholder="you123">
+              <input name="username" type="text" class="form-control pl-1" id="uname" aria-describedby="uname_desc" pattern="^[a-z0-9]{6,30}$" placeholder="you123" required>
             </div>
           </div>
           <div class="col-6">
-            <input name="username" type="text" class="form-control" id="uname" aria-describedby="uname_desc" pattern="^[ -~]{2,250}$" placeholder="You, One-two-three.">
+            <input name="displayname" type="text" class="form-control" id="dname" aria-describedby="dname_desc" pattern="^[ -~]{2,250}$" placeholder="You, the one and only." required>
           </div>
         </div>
         <div class="row">
           <div class="col-6">
-            <small id="uname_handle_desc" class="form-text text-muted">Username : 6 to 30 characters, only lowercase letters and numbers</small>
+            <small id="uname_desc" class="form-text text-muted">Username : 6 to 30 characters, only lowercase letters and numbers, starts with a letter</small>
           </div>
           <div class="col-6">
-            <small id="uname_display_desc" class="form-text text-muted">Display name : 2 to 250 common characters (letters, numbers, spaces, common English symbols)</small>
+            <small id="dname_desc" class="form-text text-muted">Display name : 2 to 250 common characters (letters, numbers, spaces, common English symbols)</small>
           </div>
         </div>
       </div>
@@ -46,19 +53,19 @@
         <label for="pw1">Password</label>
         <div class="row">
           <div class="col">
-            <input name="password1" type="password" class="form-control has-button" id="pw1" aria-describedby="pw_desc" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$" placeholder="Password">
-            <button id="genPW" onclick="generatePassword();return false;" class="set-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="Generate password&lt;br/&gt;(will paste it to the clipboard)" style="display:none;">
+            <input name="password1" type="password" class="form-control has-button" id="pw1" aria-describedby="pw_desc" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$" placeholder="Password" required>
+            <button id="genPW" onclick="generatePassword();return false;" class="set-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="&lt;span id=&quot;pw_msg&quot;&gt;Generate password&lt;br/&gt;(will paste it to the clipboard)&lt;/span&gt;" style="display:none;">
               <i class="fas fa-sync-alt"></i>
             </button>
           </div>
           <div class="col">
-            <input name="password2" type="password" class="form-control has-button" id="pw2" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$" placeholder="Confirm password">
+            <input name="password2" type="password" class="form-control has-button" id="pw2" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])[ -~]{12,255}$" placeholder="Confirm password" required>
           </div>
         </div>
         <small id="pw_desc" class="form-text text-muted">Pick at least 12 characters, including an uppercase letter, a lowercase letter, a number, and a symbol.</small>
       </div>
       <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input set-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="&lt;b&gt;READ THE TERMS!&lt;/b&gt;" id="readTos">
+        <input type="checkbox" name="tos_read" class="form-check-input set-tooltip" data-toggle="tooltip" data-placement="top" data-html="true" title="&lt;b&gt;READ THE TERMS!&lt;/b&gt;" id="readTos">
         <label class="form-check-label" for="readTos">I have read, understood and agreed to the Terms of Service</label>
       </div>
       <input type="submit" class="btn btn-primary" value="Register" />
@@ -96,13 +103,18 @@
   </div>
 </div>
 
+<script src="/js/utils.js"></script>
 <script>
 
 // Show the password generator only if JS is enabled
 $("#genPW").show();
 
+var hasReadTos = false;
 $("#readTos").click(()=>{
-  $('#tos_modal').modal('show');
+  if (!hasReadTos) {
+    $('#tos_modal').modal('show');
+    hasReadTos = true;
+  }
 })
 
 function generatePassword() {
@@ -111,8 +123,8 @@ function generatePassword() {
   for (var i = 0; i < 8; i++) {
     // That function uses Base64 encoding to get a random
     // lowercase letter, uppercase letter, or number.
-    // Change 248 to 256 to include the symbos "+" and "/".
-    pw = pw + btoa(String.fromCharCode(Math.random()*255)).substr(0,1);
+    // Change 248 to 256 to include the symbols "+" and "/".
+    pw = pw + btoa(String.fromCharCode(Math.random()*248)).substr(0,1);
   }
 
   // Add one lowercase letter, one uppercase letter, one number and one symbol to make sure they exist
@@ -130,7 +142,13 @@ function generatePassword() {
   pos = Math.floor(Math.random()*12)
   pw = pw.slice(0, pos) + String.fromCharCode(Math.random()*13+33) + pw.slice(pos);
 
-  console.log(pw);
+  copyText(pw, function() {
+    $("#pw_msg")[0].innerText = "Copied!";
+    $('#genPW').tooltip('update');
+  }, function() {
+    $("#pw_msg")[0].innerText = "Error : could not copy";
+    $('#genPW').tooltip('update');
+  })
 
   $("#pw1")[0].value = pw;
   $("#pw2")[0].value = pw;

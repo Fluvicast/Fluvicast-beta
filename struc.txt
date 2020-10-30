@@ -1,2 +1,17 @@
 
 
+/settings
+/settings/logins
+    List of all tokens with info
+/settings/email
+    Add/remove email address
+    Security notifications (choose address)
+    Recover account (pick all emails, and pick number of emails to validate)
+/settings/security
+    Pick which methods can be used for validating a login : (username/pw, email, phone...)
+    Minimum amount of methods for new locations
+    Minimum amount of methods at all times
+/settings/privacy
+    Disable telemetry (if any?)
+    Request all account data
+    Delete account

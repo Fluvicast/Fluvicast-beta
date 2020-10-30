@@ -1,4 +1,5 @@
 const db = require('../utils/db.js')
+const sess = require('../utils/session.js')
 
 
 // FIXME : A user can comment without being authenticated
